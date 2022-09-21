@@ -8,7 +8,7 @@ import axios from "axios";
 import React, { useState, useEffect, useCallback } from "react";
 import ReleasedMovies from "./ReleasedMovies";
 import MoviesFilter from './MoviesFilter';
-
+import Header from '../../common/header/Header';
 
 
 const useStyles = makeStyles({
@@ -54,6 +54,7 @@ const Home = ()=> {
 
   return (
     <div >
+      <Header/>
        <div className="upcoming_movies">Upcoming Movies</div>
        <div id="list_container">     
         <GridList className={classes.gridList} cols={6} cellHeight={250}>

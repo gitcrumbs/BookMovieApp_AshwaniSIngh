@@ -1,0 +1,30 @@
+#header_component{
+    background-color: #222;
+    height: 36px;
+    padding: 8px,32px,8px,16px;
+    
+}
+
+#login_button{
+ position: relative;
+ float: right;
+ margin-right: 10px;
+ 
+}
+
+#logoImage{ 
+ background-color: #ff7f7f;
+ height: 35px;
+ align-items: left;
+ animation: rotation 8s infinite linear;
+}
+
+
+@keyframes rotation {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(359deg);
+    }
+  }
