@@ -1,0 +1,12 @@
+
+.upcoming_movies{
+    background-color: #ff9999;
+    padding: 8px;
+    font-size: 1rem;  
+    text-align: center;
+}
+
+
+#list_container{
+    max-width: 99.89%;
+}
