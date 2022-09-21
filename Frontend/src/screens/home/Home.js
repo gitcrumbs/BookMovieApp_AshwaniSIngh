@@ -3,7 +3,7 @@ import GridListTile from "@material-ui/core/GridListTile";
 import GridListTileBar from "@material-ui/core/GridListTileBar";
 import IconButton from "@material-ui/core/IconButton";
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import ReleasedMovies from "./ReleasedMovies";
 import MoviesFilter from './MoviesFilter';
 import './Home.css'
@@ -12,6 +12,18 @@ const Home = () =>{
   const [data, setData] = useState([]);
   const [releaseddata, setreleaseddata] = useState([]);  
   
+  useEffect(() => {
+    axios
+      .get("http://localhost:8085/api/v1/movies?limit=500&status=PUBLISHED")
+      .then((response) => setData(response.data.movies));
+
+      axios
+      .get("http://localhost:8085/api/v1/movies?limit=500&status=RELEASED")
+      .then((response) => setreleaseddata(response.data.movies));
+
+  }, []);
+
+
   
     return (
         <div >

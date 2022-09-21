@@ -1,0 +1,11 @@
+.released_movies{
+    display: flex;
+    width: 76%;
+    position: relative;
+    overflow-y: scroll;
+}
+
+.released_container{
+    display: flex;
+    margin-right: 0;
+}
