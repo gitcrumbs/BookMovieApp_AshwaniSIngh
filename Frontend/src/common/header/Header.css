@@ -1,3 +1,21 @@
+#header_container{
+  height: 40px;
+  
+}
+
+.button_container{  
+  display: flex;  
+  justify-content: end;
+  
+}
+
+.header_buttons{
+  display: flex;
+  justify-content: space-between;
+  margin-top: 3px;
+  
+}
+
 #header_component{
     background-color: #222;
     height: 36px;
@@ -6,17 +24,22 @@
 }
 
 #login_button{
+ display: flex; 
  position: relative;
- float: right;
- margin-right: 10px;
+ justify-content: right;
  
-}
+  
+ }
 
 #logoImage{ 
  background-color: #ff7f7f;
  height: 35px;
- align-items: left;
  animation: rotation 8s infinite linear;
+ display: inline-block;
+ position: absolute;
+
+
+ 
 }
 
 

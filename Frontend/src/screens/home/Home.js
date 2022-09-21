@@ -9,23 +9,25 @@ import ReleasedMovies from "./ReleasedMovies";
 import axios from "axios";
 import React, { useState, useEffect, useCallback } from "react";
 
+
 const styles = theme => ({
   root: {
     display: "flex",
     flexWrap: "wrap",
     justifyContent: "space-around",
     overflow: "hidden",
-    marginBottom: "15px",
+    
   },
   gridList: {
     flexWrap: "nowrap",
-    transform: "translateZ(0)",
+    transform: "translateZ(0)",        
   },
 
   titleBar: {
     background:
       "linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.3) 70%, rgba(0,0,0,0) 100%)",
   },
+ 
 });
 
 
@@ -49,8 +51,9 @@ function Home(props) {
   const { classes } = props;
 
   return (
-    <div className={classes.root}>
-       <GridList className={classes.gridList} cols={6} cellHeight={250}>
+    
+    <div id="list_container">
+     <GridList className={classes.gridList} cols={6} cellHeight={250} >
        {tileData.map((tile) => (          
             <GridListTile key={tile.id}>
               <img src={tile.poster_url} alt={tile.title} />
@@ -64,12 +67,14 @@ function Home(props) {
 
        </GridList>
        <ReleasedMovies movieData={releaseddata} />  
+    <div>
+     
+      
+    </div>
     </div>
   );
 }
 
-Home.propTypes = {
-  classes: PropTypes.object.isRequired,
-};
+
 
 export default withStyles(styles)(Home);

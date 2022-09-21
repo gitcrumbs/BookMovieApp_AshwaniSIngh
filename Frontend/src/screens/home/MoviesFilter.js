@@ -58,7 +58,7 @@ const MoviesFilter = (props) => {
 
     const submitCriteria = (event) => {
         event.preventDefault();
-        let url = new URL('http://localhost:8085/api/v1/movies?limit=500')
+        let url = new URL('http://localhost:8085/api/v1/movies?limit=500&status=Released')
 
         const moviesFilter = {
         
@@ -72,22 +72,22 @@ const MoviesFilter = (props) => {
 
         for (const item in moviesFilter) {          
 
-             if((item==='name')&&moviesFilter[item]!=''){
+             if((item==='name')&&moviesFilter[item]!==''){
                 url.searchParams.set('title', moviesFilter[item]);
                 console.log(item+"My item is"+moviesFilter[item])
              }
 
-             if((item==='releaseStartDate')&&moviesFilter[item]!=''){
+             if((item==='releaseStartDate')&&moviesFilter[item]!==''){
                 url.searchParams.set('start_date', moviesFilter[item]);
              }
 
-             if((item==='releaseEndDate')&&moviesFilter[item]!=''){
+             if((item==='releaseEndDate')&&moviesFilter[item]!==''){
                 url.searchParams.set('end_date', moviesFilter[item]);
              }
 
 
              if((item==='genres')&&moviesFilter[item].length>0){
-                url.searchParams.set('genres', moviesFilter[item]);
+                url.searchParams.set('genre', moviesFilter[item]);
              }
 
              if((item==='artists')&&moviesFilter[item].length>0){

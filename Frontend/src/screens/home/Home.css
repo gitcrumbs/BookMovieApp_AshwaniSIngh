@@ -6,7 +6,10 @@
     text-align: center;
 }
 
+element.style {
+    margin: 0px;
+}
 
-#list_container{
-    max-width: 99.89%;
+.list_container{
+    width: 100%;
 }
