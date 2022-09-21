@@ -149,13 +149,8 @@ const MoviesFilter = (props) => {
         options.map((item) => {
             value.push(item)
         })
-        // for (let i = 0, l = options.length; i < l; i += 1) {
-        //     if (options[i].selected) {
-        //         value.push(options[i].value);
-        //     }
-        // }
-        console.log("Generated Value", options)
-        //setGenreChoice(JSON.parse(value));       
+             
+        
     };
 
     const handleChangeArtistMultiple = (event) => {

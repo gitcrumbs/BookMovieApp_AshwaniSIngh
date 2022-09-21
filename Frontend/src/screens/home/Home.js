@@ -8,7 +8,7 @@ import StarBorderIcon from '@material-ui/icons/StarBorder';
 import ReleasedMovies from "./ReleasedMovies";
 import axios from "axios";
 import React, { useState, useEffect, useCallback } from "react";
-
+import './Home.css'
 
 const styles = theme => ({
   root: {
@@ -16,18 +16,18 @@ const styles = theme => ({
     flexWrap: "wrap",
     justifyContent: "space-around",
     overflow: "hidden",
-    
+
   },
   gridList: {
     flexWrap: "nowrap",
-    transform: "translateZ(0)",        
+    transform: "translateZ(0)",
   },
 
   titleBar: {
     background:
       "linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.3) 70%, rgba(0,0,0,0) 100%)",
   },
- 
+
 });
 
 
@@ -35,42 +35,46 @@ const styles = theme => ({
 function Home(props) {
 
   const [tileData, settileData] = useState([]);
-  const [releaseddata, setreleaseddata] = useState([]);  
+  const [releaseddata, setreleaseddata] = useState([]);
 
   useEffect(() => {
     axios
       .get("http://localhost:8085/api/v1/movies?limit=500&status=PUBLISHED")
       .then((response) => settileData(response.data.movies));
-  
-      axios
+
+    axios
       .get("http://localhost:8085/api/v1/movies?limit=500&status=RELEASED")
       .then((response) => setreleaseddata(response.data.movies));
-  
+
   }, []);
 
   const { classes } = props;
 
   return (
-    
-    <div id="list_container">
-     <GridList className={classes.gridList} cols={6} cellHeight={250} >
-       {tileData.map((tile) => (          
+    <div>
+      <div className="upcoming_movies">Upcoming Movies</div>
+      <div id="list_container">
+
+        <GridList className={classes.gridList} cols={6} cellHeight={250} >
+          {tileData.map((tile) => (
             <GridListTile key={tile.id}>
               <img src={tile.poster_url} alt={tile.title} />
               <GridListTileBar
-                title={tile.title}                
+                title={tile.title}
                 actionIcon={<IconButton aria-label={`star ${tile.title}`} />}
               />
             </GridListTile>
-            
+
           ))}
 
-       </GridList>
-       <ReleasedMovies movieData={releaseddata} />  
-    <div>
-     
+        </GridList>
+        </div>
+        <ReleasedMovies movieData={releaseddata} />
+        <div>
+
+
+        </div>
       
-    </div>
     </div>
   );
 }

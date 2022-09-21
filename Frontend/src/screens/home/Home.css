@@ -4,6 +4,8 @@
     padding: 8px;
     font-size: 1rem;  
     text-align: center;
+    margin-top: -4px;
+    margin-bottom: 3px;
 }
 
 element.style {
@@ -12,4 +14,5 @@ element.style {
 
 .list_container{
     width: 100%;
+    
 }
