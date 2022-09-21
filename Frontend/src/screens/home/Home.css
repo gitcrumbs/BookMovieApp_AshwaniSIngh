@@ -10,16 +10,3 @@
 #list_container{
     max-width: 99.89%;
 }
-
-.gridListStyles{
-    flex-wrap: "nowrap";
-    transform: "translateZ(0)"
-}
-
-.root{
-    display: "flex";
-    flex-wrap: "wrap";
-    justify-content: "space-around";
-    overflow: "hidden";
-    margin-bottom: "15px"
-  }
