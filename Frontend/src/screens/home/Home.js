@@ -3,7 +3,7 @@ import GridListTile from "@material-ui/core/GridListTile";
 import GridListTileBar from "@material-ui/core/GridListTileBar";
 import IconButton from "@material-ui/core/IconButton";
 import axios from "axios";
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState } from "react";
 import ReleasedMovies from "./ReleasedMovies";
 import MoviesFilter from './MoviesFilter';
 import './Home.css'
@@ -11,8 +11,7 @@ const Home = () =>{
 
   const [data, setData] = useState([]);
   const [releaseddata, setreleaseddata] = useState([]);  
-  const [genres, setGenres] = useState([]);
-  const [artists, setArtists] = useState([]);
+  
   
     return (
         <div >
