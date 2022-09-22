@@ -5,22 +5,21 @@ import "../../assets/logo.svg"
 import LoginRegister from "../loginModal/LoginRegister";
 
 
-
-
-
-
 const Header = () => {
 
   const [isLoggedIn, setisLoggedIn] = useState(false);
+  const [loginClick, setloginClick] = useState(false);
 
-  const handleLogout = () =>{    
+  const handleLogout = () =>{  
+    setloginClick(false);
     setisLoggedIn(false)
   }
   
   
-  const handleLogin= () =>{
-      
-    setisLoggedIn(true)
+  const handleLogin= () =>{   
+
+    setloginClick(true);
+    setisLoggedIn(true);
   
   }
 
@@ -28,6 +27,8 @@ const Header = () => {
     <div id="header_container" >
       <div id="header_component" >
         <img id="logoImage" alt="logo" src={require("../../assets/logo.svg")} ></img>
+      {console.log("Is App logged in ?"+loginClick)}
+        {loginClick ? <LoginRegister loginClick={loginClick} />: null}
 
         {isLoggedIn ? <div className="button_container">
 
@@ -44,11 +45,9 @@ const Header = () => {
   
       </div>}
 
-
-
       </div>
 
-      <LoginRegister />
+      
 
 
     </div>

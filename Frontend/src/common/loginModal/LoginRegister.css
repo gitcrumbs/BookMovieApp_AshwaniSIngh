@@ -1,0 +1,31 @@
+
+#login_modal{       
+    width:25%;  
+    height: fit-content; 
+    margin-top: 2%;  
+    margin-left: 33%;     
+    
+  }
+  
+
+  .form_button{    
+    margin-top: 15%;
+    margin-left: 5%;
+  }
+
+  #btn_login{
+    margin-left: 12%;
+  }
+
+
+  element.style {
+    border: none
+ 
+}
+
+.required_messages{
+  font-weight: bold; 
+  font-size: 13px;
+  color: red;
+}
+  
