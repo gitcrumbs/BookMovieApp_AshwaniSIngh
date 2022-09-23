@@ -34,3 +34,12 @@
     margin: 10px 0px;
   }
   
+
+  #book_show{
+    display: flex;
+    
+    margin-top: -37px;
+    position: relative;
+    justify-content: right;
+    margin-right: 77px;
+  }

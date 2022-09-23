@@ -9,11 +9,13 @@ const Header = () => {
 
   const [isLoggedIn, setisLoggedIn] = useState(false);
   const [loginClick, setloginClick] = useState(false);
+  
 
   const handleLogout = () =>{  
     setloginClick(false);
     setisLoggedIn(false)
   }
+  
   
   
   const handleLogin= () =>{   
@@ -23,17 +25,17 @@ const Header = () => {
   
   }
 
+ 
+
   return (
     <div id="header_container" >
       <div id="header_component" >
         <img id="logoImage" alt="logo" src={require("../../assets/logo.svg")} ></img>
-      {console.log("Is App logged in ?"+loginClick)}
+      
         {loginClick ? <LoginRegister loginClick={loginClick} />: null}
 
-        {isLoggedIn ? <div className="button_container">
-
+        {isLoggedIn ? <div className="button_container">          
           <div className="header_buttons">
-            <Button variant="contained" size="small" style={{ marginRight: "10px" }} color="primary">Book Show</Button>
             <Button variant="contained" size="small" color="default" style={{ marginRight: "10px" }} onClick={handleLogout} >Logout</Button>
           </div>
 

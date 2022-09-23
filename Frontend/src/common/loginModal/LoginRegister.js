@@ -4,8 +4,7 @@ import {
     Tab,
     Tabs,
     TextField,
-    Typography,
-    FormControl,
+    Typography    
 } from "@material-ui/core";
 import Modal from 'react-modal';
 import Panel from '../panel/Panel'
@@ -20,11 +19,17 @@ const LoginRegister = ({loginClick}) => {
     const [login, setLogin] = useState(true);
     const [success, setSuccess] = useState(false);
 
-    const [firstName, setfirstName] = useState("");
+    const [firstName, setfirstName] = useState("");    
+    const [isfirstNameset, setisfirstNameset] = useState(false); 
     const [lastName, setlastName] = useState("");
+    const [IslastNameSet, setlastNameSet] = useState(false);
     const [email, setemail] = useState("");
+    const [IsemailSet, setemailSet] = useState(false);
     const [password, setpassword] = useState("");
+    const [IspasswordSet, setpasswordSet] = useState(false);
     const [contactNumber, setcontactNumber] = useState("");
+    const [IscontactNumberset, setIscontactNumberset] = useState(false);
+    
 
 
     const registerform = {
@@ -51,10 +56,37 @@ const LoginRegister = ({loginClick}) => {
     };
 
     const registerFormHandler = () => {
-        setLogin(false);
-        setSuccess(true);
+    
+        for (const item in registerform){
 
-        console.log(registerform);
+             switch (item) {
+                case 'firstName':
+                    setisfirstNameset(item==='firstName'&&registerform[item]==='');
+                    break;
+                case 'lastName':
+                    setlastNameSet(item==='lastName'&&registerform[item]==='');
+                    break;    
+                case 'email':
+                    setemailSet(item==='email'&&registerform[item]==='');
+                    break;
+                case 'password':
+                    setpasswordSet(item==='password'&&registerform[item]==='');
+                    break;
+                 case 'contactNumber':
+                    setIscontactNumberset(item==='contactNumber'&&registerform[item]==='');
+                    break;
+
+                default:
+                    break;
+             }
+                     
+            
+        }
+
+        const finalSet = [isfirstNameset,IslastNameSet,IsemailSet,IspasswordSet,IscontactNumberset]
+
+        setSuccess(finalSet.includes(true))       
+        
     };
 
 
@@ -113,15 +145,15 @@ const LoginRegister = ({loginClick}) => {
                 </Panel>
                 <Panel value={value} index={1}>
                     <TextField label="First Name" required style={{ margin: "5px 0px" }} onChange={handleUserFirstName}/>
-                    <section className="required_messages">required</section>
+                    {isfirstNameset ?<section className="required_messages">required</section>:null}
                     <TextField label="Last Name" style={{ margin: "5px 0px" }} onChange={handleUserlastName}/>
-                    <section className="required_messages">required</section>
+                    {IslastNameSet ? <section className="required_messages">required</section>:null}
                     <TextField label="Email" required style={{ margin: "5px 0px" }} onChange={handleEmail}/>
-                    <section className="required_messages">required</section>
+                    {IsemailSet ? <section className="required_messages">required</section>:null}
                     <TextField className="required_messages" label="Password"  type="password" style={{ margin: "5px 0px" }} onChange={handlePassword}/>
-                    <section className="required_messages">required</section>
+                    {IspasswordSet ? <section className="required_messages">required</section>:null}
                     <TextField className="required_messages" label="Contact No" style={{ margin: "5px 0px" }} onChange={handlephoneNumber}/>
-                    <section className="required_messages">required</section>
+                    {IscontactNumberset ? <section className="required_messages">required</section>:null}
                     {success ? (
                         <Typography variant="subtitle1" gutterBottom>
                             Registration Successful. Please login!

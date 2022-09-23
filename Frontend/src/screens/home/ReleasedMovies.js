@@ -11,12 +11,14 @@ import axios from "axios";
 
 
 
-export default function ReleasedMovies( {movieData}, filteredUrl ) {
+
+export default function ReleasedMovies( {movieData}) {
   const [filteredData, setfilteredData] = useState([]);
   const [updatedUrl, setupdatedUrl] = useState("");
   const [updatedEvent, setupdatedEvent] = useState(false);
 
-
+  
+  
   
 
   useEffect(()=>{
@@ -45,11 +47,11 @@ export default function ReleasedMovies( {movieData}, filteredUrl ) {
           var expectedDate = new Date(tile.release_date).toDateString();
 
           return (
-            <GridListTile key={tile.id}>
-              <Link to={"/movie-details/" + tile.id}>
+            <GridListTile key={tile.id} >
+              <Link to={"/movie-details/" + tile.id} >
                 <img
                   src={tile.poster_url}
-                  alt={tile.title}
+                  alt={tile.title}                  
                   style={{
                     width: "100%",
                     alignItems: "center",
@@ -90,6 +92,7 @@ export default function ReleasedMovies( {movieData}, filteredUrl ) {
                     alignItems: "center",
                     margin: "0px",
                   }}
+                
                 />
               </Link>
               <GridListTileBar

@@ -1,14 +1,14 @@
-import PropTypes from 'prop-types';
+
 import { withStyles } from '@material-ui/core/styles';
 import GridList from '@material-ui/core/GridList';
 import GridListTile from '@material-ui/core/GridListTile';
 import GridListTileBar from '@material-ui/core/GridListTileBar';
 import IconButton from '@material-ui/core/IconButton';
-import StarBorderIcon from '@material-ui/icons/StarBorder';
 import ReleasedMovies from "./ReleasedMovies";
 import axios from "axios";
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect } from "react";
 import './Home.css'
+
 
 const styles = theme => ({
   root: {
@@ -35,7 +35,7 @@ const styles = theme => ({
 function Home(props) {
 
   const [tileData, settileData] = useState([]);
-  const [releaseddata, setreleaseddata] = useState([]);
+  const [releaseddata, setreleaseddata] = useState([]); 
 
   useEffect(() => {
     axios
@@ -48,10 +48,12 @@ function Home(props) {
 
   }, []);
 
+  
+
   const { classes } = props;
 
   return (
-    <div>
+    <div>    
       <div className="upcoming_movies">Upcoming Movies</div>
       <div id="list_container">
 

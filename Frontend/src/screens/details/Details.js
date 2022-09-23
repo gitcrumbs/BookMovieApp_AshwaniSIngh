@@ -4,12 +4,14 @@ import { Link, useParams } from "react-router-dom";
 import axios from "axios";
 import { Typography } from "@material-ui/core";
 import YouTube from "react-youtube";
-import StarBorderIcon from "@material-ui/icons/StarBorder";
 import GridList from "@material-ui/core/GridList";
 import GridListTile from "@material-ui/core/GridListTile";
 import GridListTileBar from "@material-ui/core/GridListTileBar";
 import "./Details.css";
 import { Fragment } from "react";
+import Button from '@material-ui/core/Button';
+import Rating from '@mui/material/Rating';
+import Stack from '@mui/material/Stack';
 
 const Details = () => {
   let { id } = useParams();
@@ -17,7 +19,7 @@ const Details = () => {
   let [genres, setGenres] = useState([]);
   let [youtubeUrl, setYouttubeUrl] = useState("");
   let [actors, setActors] = useState([]);
-  let [rating, setRating] = useState(false);
+  
 
   useEffect(() => {
     axios
@@ -66,105 +68,122 @@ const Details = () => {
   };
 
   const classes = useStyles();
-
+  
   return (
-    <Fragment>
-     
-      <div className="details-content">
-        <Typography style={{ margin: "10px" }}>
-          <Link to="/" className="back-link">
-            <span className="back-to-home">&#60; Back to Home</span>
-          </Link>
-        </Typography>
-        <div className="main-content">
-          {/* First Section */}
-          <div className="first-container">
-            <img src={movieData.poster_url} alt={movieData.title} />
-          </div>
-          {/* Second Section */}
-          <div className="mid-container">
-            <Typography variant="h2" component="h2">
-              {movieData.title}
-            </Typography>
-            <Typography variant="subtitle1" gutterBottom>
-              <b>Genre: </b>
-              {genres.map((genre) => `${genre}, `)}
-            </Typography>
-            <Typography variant="subtitle1" gutterBottom>
-              <b>Duration: </b>
-              {movieData.duration}
-            </Typography>
-            <Typography variant="subtitle1" gutterBottom>
-              <b>Release Date: </b>
-              {releaseDate}
-            </Typography>
-            <Typography variant="subtitle1" gutterBottom>
-              <b>Rating: </b>
-              {movieData.rating}
-            </Typography>
-            <Typography
-              variant="subtitle1"
-              gutterBottom
-              style={{ marginTop: "16px" }}
-            >
-              <b>
-                Plot:{" "}
-                <a href={movieData.wiki_url} target="_blank">
-                  (Wiki Link)
-                </a>
-              </b>
-              {" " + movieData.storyline}
-            </Typography>
-            <Typography
-              variant="subtitle1"
-              gutterBottom
-              style={{ marginTop: "16px" }}
-            >
-              <b>Trailer:</b>
-              <YouTube
-                videoId={youtubeId}
-                opts={opts}
-                onReady={(event) => {
-                  event.target.pauseVideo();
-                }}
-              />
-            </Typography>
-          </div>
-          {/* Third section */}
-          <div className="last-container">
-            <Typography variant="subtitle1" gutterBottom>
-              <b>Rate this movie:</b>
-              <div className="star-container">
-                <StarBorderIcon />
-                <StarBorderIcon />
-                <StarBorderIcon />
-                <StarBorderIcon />
-                <StarBorderIcon />
-              </div>
-              <div className="artist-heading">
-                <b>Artists: </b>
-              </div>
-              <div className={classes.root}>
-                <GridList cellHeight={180} className={classes.gridList}>
-                  {actors ? (
-                    actors.map((actor) => (
-                      <GridListTile key={actor.id}>
-                        <img src={actor.profile_url} alt={actor.first_name} />
-                        <GridListTileBar
-                          title={actor.first_name + " " + actor.last_name}
-                        />
-                      </GridListTile>
-                    ))
-                  ) : (
-                    <h6>No actor data available</h6>
-                  )}
-                </GridList>
-              </div>
-            </Typography>
+    <div>
+      <div id="book_show">
+        <Link
+          to={`/bookshow/${id}`}
+          style={{ textDecoration: "none" }}
+        >
+          <Button variant="contained" size="small" style={{ marginRight: "10px" }} color="primary">Book Show</Button>
+        </Link>
+      </div>
+
+
+      <Fragment>
+        <div className="details-content">
+          <Typography style={{ margin: "10px" }}>
+            <Link to="/" className="back-link">
+              <span className="back-to-home">&#60; Back to Home</span>
+            </Link>
+          </Typography>
+          <div className="main-content">
+            {/* First Section */}
+            <div className="first-container">
+              <img src={movieData.poster_url} alt={movieData.title} />
+            </div>
+            {/* Second Section */}
+            <div className="mid-container">
+              <Typography variant="h2" component="h2">
+                {movieData.title}
+              </Typography>
+              <Typography variant="subtitle1" gutterBottom>
+                <b>Genre: </b>
+                {genres.map((genre) => `${genre}, `)}
+              </Typography>
+              <Typography variant="subtitle1" gutterBottom>
+                <b>Duration: </b>
+                {movieData.duration}
+              </Typography>
+              <Typography variant="subtitle1" gutterBottom>
+                <b>Release Date: </b>
+                {releaseDate}
+              </Typography>
+              <Typography variant="subtitle1" gutterBottom>
+                <b>Rating: </b>
+                {movieData.rating}
+              </Typography>
+              <Typography
+                variant="subtitle1"
+                gutterBottom
+                style={{ marginTop: "16px" }}
+              >
+                <b>
+                  Plot:{" "}
+                  <a href={movieData.wiki_url} target="_blank">
+                    (Wiki Link)
+                  </a>
+                </b>
+                {" " + movieData.storyline}
+              </Typography>
+              <Typography
+                variant="subtitle1"
+                gutterBottom
+                style={{ marginTop: "16px" }}
+              >
+                <b>Trailer:</b>
+                <YouTube
+                  videoId={youtubeId}
+                  opts={opts}
+                  onReady={(event) => {
+                    event.target.pauseVideo();
+                  }}
+                />
+              </Typography>
+            </div>
+            {/* Third section */}
+            <div className="last-container">
+              <Typography variant="subtitle1" gutterBottom>
+                <b>Rate this movie:</b>
+                <div className="star-container">
+                  <Stack spacing={1}>
+                    <Rating name="half-rating" defaultValue={2.5} precision={0.5} />
+                   
+                  </Stack>
+                </div>
+                <div className="artist-heading">
+                  <b>Artists: </b>
+                </div>
+                <div className={classes.root}>
+                  <GridList cellHeight={180} className={classes.gridList}>
+                    {actors ? (
+                      actors.map((actor) => (
+                        <GridListTile key={actor.id}>
+                          <img src={actor.profile_url} alt={actor.first_name} />
+                          <GridListTileBar
+                            title={actor.first_name + " " + actor.last_name}
+                          />
+                        </GridListTile>
+                      ))
+                    ) : (
+                      <h6>No actor data available</h6>
+                    )}
+                  </GridList>
+                </div>
+              </Typography>
+            </div>
           </div>
         </div>
-      </div>
-    </Fragment>
+      </Fragment>
+
+
+
+
+
+
+    </div>
+
   );
 };
 
