@@ -18,11 +18,9 @@ const Header = () => {
   
   
   
-  const handleLogin= () =>{   
-
-    setloginClick(true);
-    setisLoggedIn(true);
-  
+  const handleLogin= () =>{ 
+    setloginClick(true);  
+   
   }
 
  
@@ -32,7 +30,7 @@ const Header = () => {
       <div id="header_component" >
         <img id="logoImage" alt="logo" src={require("../../assets/logo.svg")} ></img>
       
-        {loginClick ? <LoginRegister loginClick={loginClick} />: null}
+        {loginClick ? <LoginRegister loginClick={loginClick} setloginClick={setloginClick} setisLoggedIn={setisLoggedIn}/>: null}
 
         {isLoggedIn ? <div className="button_container">          
           <div className="header_buttons">

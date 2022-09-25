@@ -15,7 +15,7 @@ import {loginUser,registeruser} from '../../auth/Auth'
 const username = "string";
     const pwrd = "string";
 
-const LoginRegister = ({loginClick}) => {
+const LoginRegister = ({loginClick,setisLoggedIn,setloginClick}) => {
     var base64 = require("base-64");
     
 
@@ -68,13 +68,26 @@ const LoginRegister = ({loginClick}) => {
         setcontactNumber("")   
     };
 
+    const handleCloseModal = ()=>{
+        setLogin(true);
+        setLoginOpen(false);
+        setisLoggedIn(false);
+        setloginClick(false);
+      }
+
+
     const loginHandler = (e) => {
         e.preventDefault();
+
+        setLogin(false);
+        setLoginOpen(false);
+        
         try{
             console.log("User details are ",loginUserName)
             loginUser(loginUserName,loginpasswrd).then(success=>{
                 setLogin(false);
                 setLoginOpen(false);
+                setisLoggedIn(true);
             }).catch(err=>{
 
                 console.log("Unable to login",err)
@@ -190,6 +203,9 @@ const LoginRegister = ({loginClick}) => {
         setloginpasswrd(e.target.value)
       }
 
+     
+
+      
 
     return (
 
@@ -198,6 +214,8 @@ const LoginRegister = ({loginClick}) => {
                 isOpen={loginOpen}
                 ariaHideApp={false}
                 id="login_modal"
+                onRequestClose={handleCloseModal}
+                
             >
                 <Tabs value={value} onChange={handleChange}>
                     <Tab label="Login" />
