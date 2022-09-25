@@ -23,7 +23,7 @@ const Details = () => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:8085/api/v1/movies/${id}`)
+      .get(`/api/v1/movies/${id}`)
       .then((response) => {
         setMovieData(response.data);
         setGenres(response.data.genres);

@@ -9,16 +9,22 @@ import {
 import Modal from 'react-modal';
 import Panel from '../panel/Panel'
 import './LoginRegister.css'
+import loginUser from '../../auth/Auth'
+
+
+const username = "string";
+    const pwrd = "string";
 
 const LoginRegister = ({loginClick}) => {
-
+    var base64 = require("base-64");
     
 
     const [loginOpen, setLoginOpen] = useState(loginClick);
     const [value, setValue] = useState(0);
     const [login, setLogin] = useState(true);
     const [success, setSuccess] = useState(false);
-
+    const [loginUserName,setloginUserName] = useState("")
+    const [loginpasswrd,setloginpasswrd] = useState("")
     const [firstName, setfirstName] = useState("");    
     const [isfirstNameset, setisfirstNameset] = useState(false); 
     const [lastName, setlastName] = useState("");
@@ -29,8 +35,9 @@ const LoginRegister = ({loginClick}) => {
     const [IspasswordSet, setpasswordSet] = useState(false);
     const [contactNumber, setcontactNumber] = useState("");
     const [IscontactNumberset, setIscontactNumberset] = useState(false);
+    const [Data, setData] = useState("");
     
-
+    
 
     const registerform = {
         
@@ -42,15 +49,19 @@ const LoginRegister = ({loginClick}) => {
     }
 
 
-    const loginHandler = () => {
-        setLoginOpen(true);
-    };
+
+   
 
     const handleChange = (event, newValue) => {
         setValue(newValue);
     };
 
-    const loginFormHandler = () => {
+    const loginHandler = (e) => {
+        e.preventDefault();
+
+        console.log("User details are ",loginUserName)
+        loginUser(loginUserName,loginpasswrd)
+
         setLogin(false);
         setLoginOpen(false);
     };
@@ -110,6 +121,14 @@ const LoginRegister = ({loginClick}) => {
         setlastName(e.target.value);
       }
 
+      const setname = (e)=>{       
+        setloginUserName(e.target.value)
+      }
+
+      const setpaswrd =(e)=>{
+        setloginpasswrd(e.target.value)
+      }
+
 
     return (
 
@@ -125,17 +144,20 @@ const LoginRegister = ({loginClick}) => {
                 </Tabs>
                 <Panel value={value} index={0}>
                     <TextField label="Username" required style={{ margin: "5px 0px" }}  
+                    onChange={setname}
                    />
                     <TextField
                         label="Password"
                         required
                         type="password"
                         style={{ margin: "5px 0px" }}
+                        onChange={setpaswrd}
                     />
+
                     <div className="form_button">
                         <Button id="btn_login"
-                            variant="contained"
-                            onClick={loginFormHandler}
+                            variant="contained"                          
+                            onClick={loginHandler}
                             color="primary"
                         >
                             Login

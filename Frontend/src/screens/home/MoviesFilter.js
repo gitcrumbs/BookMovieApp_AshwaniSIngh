@@ -31,12 +31,12 @@ const MoviesFilter = (props) => {
     useEffect(() => {
 
         axios
-            .get("http://localhost:8085/api/v1/genres")
+            .get("/api/v1/genres")
             .then((response) => setGenres(response.data.genres));
 
 
         axios
-            .get("http://localhost:8085/api/v1/artists")
+            .get("/api/v1/artists")
             .then((response) => setArtists(response.data.artists));
 
 
@@ -58,7 +58,7 @@ const MoviesFilter = (props) => {
 
     const submitCriteria = (event) => {
         event.preventDefault();
-        let url = new URL('http://localhost:8085/api/v1/movies?limit=500&status=Released')
+        let url = new URL('/api/v1/movies?limit=500&status=Released')
 
         const moviesFilter = {
         

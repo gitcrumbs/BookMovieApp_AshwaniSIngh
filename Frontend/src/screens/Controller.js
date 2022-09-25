@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 import BookShow from "../screens/bookshow/BookShow";
 import Confirmation from "../screens/confirmation/Confirmation";
 import Header from '../common/header/Header'
+import LoginRegister from "../common/loginModal/LoginRegister";
 
 
 
@@ -16,13 +17,14 @@ const Controller = () => {
     const [movieclicked, setmovieclicked] = useState(false);
 
    const handleMovieClick = () =>{
-    setmovieclicked(true)
+     setmovieclicked(true)
    }
    
   return (
     <Router>
       <div className="main-container"> 
-      <Header/>     
+      <Header/>  
+      
         <Route
           exact
           path="/"

@@ -39,11 +39,11 @@ function Home(props) {
 
   useEffect(() => {
     axios
-      .get("http://localhost:8085/api/v1/movies?limit=500&status=PUBLISHED")
+      .get("/api/v1/movies?limit=500&status=PUBLISHED")
       .then((response) => settileData(response.data.movies));
 
     axios
-      .get("http://localhost:8085/api/v1/movies?limit=500&status=RELEASED")
+      .get("/api/v1/movies?limit=500&status=RELEASED")
       .then((response) => setreleaseddata(response.data.movies));
 
   }, []);
