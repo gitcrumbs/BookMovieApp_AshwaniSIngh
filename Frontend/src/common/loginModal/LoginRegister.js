@@ -9,7 +9,7 @@ import {
 import Modal from 'react-modal';
 import Panel from '../panel/Panel'
 import './LoginRegister.css'
-import loginUser from '../../auth/Auth'
+import {loginUser,registeruser} from '../../auth/Auth'
 
 
 const username = "string";
@@ -35,7 +35,8 @@ const LoginRegister = ({loginClick}) => {
     const [IspasswordSet, setpasswordSet] = useState(false);
     const [contactNumber, setcontactNumber] = useState("");
     const [IscontactNumberset, setIscontactNumberset] = useState(false);
-    const [Data, setData] = useState("");
+    const [displayText, setdisplayText] = useState("");
+    const [stausCode, setstausCode] = useState(0);
     
     
 
@@ -94,12 +95,34 @@ const LoginRegister = ({loginClick}) => {
             
         }
 
-        const finalSet = [isfirstNameset,IslastNameSet,IsemailSet,IspasswordSet,IscontactNumberset]
+        const finalSet = !isfirstNameset&&!IslastNameSet&&!IsemailSet&&!IspasswordSet&&!IscontactNumberset;
 
-        setSuccess(finalSet.includes(true))       
+        if(finalSet){            
+           registeruser(registerform).then(item=>{
+            
+                setdisplayText("'Registration Successful. Please login!'") 
+                
+                setSuccess(finalSet)
+            
+        }).catch(error=>{         
+            try{
+                    
+                    setdisplayText(error.response.data.message)
+                    setSuccess(true)    
+
+            } catch(except) {
+                console.log("Inside exception",except)
+            }   
+                 
+        });          
+            
+        } 
+        
+        
         
     };
 
+   
 
     const handlephoneNumber = (e) =>{
         setcontactNumber(e.target.value)
@@ -177,8 +200,8 @@ const LoginRegister = ({loginClick}) => {
                     <TextField className="required_messages" label="Contact No" style={{ margin: "5px 0px" }} onChange={handlephoneNumber}/>
                     {IscontactNumberset ? <section className="required_messages">required</section>:null}
                     {success ? (
-                        <Typography variant="subtitle1" gutterBottom>
-                            Registration Successful. Please login!
+                        <Typography variant="subtitle1" gutterBottom>                           
+                            {displayText}
                         </Typography>
                     ) : null}
 

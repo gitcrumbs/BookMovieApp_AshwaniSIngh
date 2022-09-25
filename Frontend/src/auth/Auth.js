@@ -1,22 +1,42 @@
 import axios from "axios";
 
-async function loginUser(username, password) {
+export async function loginUser(username, password) {
 
     let encrypted = btoa(`${username}:${password}`)
 
-    await axios.post('/api/v1/auth/login', {},
+   let response = await axios.post('/api/v1/auth/login', {},
         {
             headers: {
                 "Access-Control-Allow-Origin" : "*",
                 "Content-type": "Application/json",
                 "Authorization": `Basic ${encrypted}`}           
         }
-    ).then((response) => {
-            console.log("Response Checks", response)
-        }).catch((error) => {
-            console.log("Error Checks", error)
-        })
+    )
+    return response;
 }
 
 
-export default loginUser;
+
+export async function registeruser (registerform) {
+  
+    const sendDataItems = {
+        "email_address": registerform['email'],
+        "first_name": registerform['firstName'],
+        "last_name": registerform['lastName'],
+        "mobile_number": registerform['contactNumber'],
+        "password": registerform['password']
+      }
+
+  let response =  await axios.post('/api/v1/signup', sendDataItems,
+        {
+            headers: {
+                "Access-Control-Allow-Origin" : "*",
+                "Content-type": "Application/json",                        
+        }
+    })
+
+    
+    return response;
+}
+
+
