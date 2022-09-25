@@ -36,12 +36,11 @@ const LoginRegister = ({loginClick}) => {
     const [contactNumber, setcontactNumber] = useState("");
     const [IscontactNumberset, setIscontactNumberset] = useState(false);
     const [displayText, setdisplayText] = useState("");
-    const [stausCode, setstausCode] = useState(0);
-    
+    const [logindisplayText, setlogindisplayText] = useState("");
+    const [isValidated, setisValidated] = useState(false);
     
 
-    const registerform = {
-        
+    const registerform = {        
         firstName,
         lastName ,
         email,
@@ -55,73 +54,112 @@ const LoginRegister = ({loginClick}) => {
 
     const handleChange = (event, newValue) => {
         setValue(newValue);
+        setdisplayText("")
+        setisfirstNameset(false)
+        setlastNameSet(false)
+        setemailSet(false)
+        setpasswordSet(false)
+        setIscontactNumberset(false)
+        setisValidated(false);
+        setfirstName(""),
+        setlastName("") ,
+        setemail(""),
+        setpassword(""),
+        setcontactNumber("")   
     };
 
     const loginHandler = (e) => {
         e.preventDefault();
+        try{
+            console.log("User details are ",loginUserName)
+            loginUser(loginUserName,loginpasswrd).then(success=>{
+                setLogin(false);
+                setLoginOpen(false);
+            }).catch(err=>{
 
-        console.log("User details are ",loginUserName)
-        loginUser(loginUserName,loginpasswrd)
+                console.log("Unable to login",err)
+                setlogindisplayText("Unable to login");
+                setLoginOpen(true);
+                setLogin(true);
+            })
+        }catch(except){
+            console.log("Unable to login",except)
+            setLoginOpen(true);
+            setLogin(true);
+        }
+       
 
-        setLogin(false);
-        setLoginOpen(false);
+       
+        
     };
 
     const registerFormHandler = () => {
-    
+        
+         validateFields();
+         const valueset =  firstName!==''&&lastName!==''&&email!==''&&password!==''&&contactNumber!=='' ;       
+        
+        if(valueset){            
+            registeruser(registerform).then(item=>{
+             
+                 setdisplayText("'Registration Successful. Please login!'") 
+                 
+                 setSuccess(valueset)
+             
+         }).catch(error=>{         
+             try{
+                     
+                     setdisplayText(error.response.data.message)
+                     setSuccess(true)    
+ 
+             } catch(except) {
+                 console.log("Inside exception",except)
+             }   
+                  
+         });          
+             
+         } 
+    };
+
+
+    const validateFields = ()=>{
+
+        let finalSet = false;
+        setisfirstNameset(false)
+        setlastNameSet(false)
+        setemailSet(false)
+        setpasswordSet(false)
+        setIscontactNumberset(false)
+        setisValidated(false);
         for (const item in registerform){
 
              switch (item) {
                 case 'firstName':
-                    setisfirstNameset(item==='firstName'&&registerform[item]==='');
+                    setisfirstNameset(firstName!=='');
                     break;
                 case 'lastName':
-                    setlastNameSet(item==='lastName'&&registerform[item]==='');
+                    setlastNameSet(lastName!=='');
                     break;    
                 case 'email':
-                    setemailSet(item==='email'&&registerform[item]==='');
+                    setemailSet(email!=='');
                     break;
                 case 'password':
-                    setpasswordSet(item==='password'&&registerform[item]==='');
+                    setpasswordSet(password!=='');
                     break;
                  case 'contactNumber':
-                    setIscontactNumberset(item==='contactNumber'&&registerform[item]==='');
+                    setIscontactNumberset(contactNumber!=='');
                     break;
 
                 default:
                     break;
              }
-                     
+                 
             
         }
+        setisValidated(true);   
 
-        const finalSet = !isfirstNameset&&!IslastNameSet&&!IsemailSet&&!IspasswordSet&&!IscontactNumberset;
-
-        if(finalSet){            
-           registeruser(registerform).then(item=>{
-            
-                setdisplayText("'Registration Successful. Please login!'") 
-                
-                setSuccess(finalSet)
-            
-        }).catch(error=>{         
-            try{
-                    
-                    setdisplayText(error.response.data.message)
-                    setSuccess(true)    
-
-            } catch(except) {
-                console.log("Inside exception",except)
-            }   
-                 
-        });          
-            
-        } 
+     
         
-        
-        
-    };
-
+    }
    
 
     const handlephoneNumber = (e) =>{
@@ -186,19 +224,19 @@ const LoginRegister = ({loginClick}) => {
                             Login
                         </Button>
                     </div>
-
+                    {(logindisplayText!=="")&&<p className="required_messages">{logindisplayText}</p>}
                 </Panel>
                 <Panel value={value} index={1}>
                     <TextField label="First Name" required style={{ margin: "5px 0px" }} onChange={handleUserFirstName}/>
-                    {isfirstNameset ?<section className="required_messages">required</section>:null}
+                    {isValidated&&!isfirstNameset ?<section className="required_messages">required</section>:null}
                     <TextField label="Last Name" style={{ margin: "5px 0px" }} onChange={handleUserlastName}/>
-                    {IslastNameSet ? <section className="required_messages">required</section>:null}
+                    {isValidated&&!IslastNameSet ? <section className="required_messages">required</section>:null}
                     <TextField label="Email" required style={{ margin: "5px 0px" }} onChange={handleEmail}/>
-                    {IsemailSet ? <section className="required_messages">required</section>:null}
+                    {isValidated&&!IsemailSet ? <section className="required_messages">required</section>:null}
                     <TextField className="required_messages" label="Password"  type="password" style={{ margin: "5px 0px" }} onChange={handlePassword}/>
-                    {IspasswordSet ? <section className="required_messages">required</section>:null}
+                    {isValidated&&!IspasswordSet ? <section className="required_messages">required</section>:null}
                     <TextField className="required_messages" label="Contact No" style={{ margin: "5px 0px" }} onChange={handlephoneNumber}/>
-                    {IscontactNumberset ? <section className="required_messages">required</section>:null}
+                    {isValidated&&!IscontactNumberset ? <section className="required_messages">required</section>:null}
                     {success ? (
                         <Typography variant="subtitle1" gutterBottom>                           
                             {displayText}
