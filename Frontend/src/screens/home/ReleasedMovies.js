@@ -23,11 +23,10 @@ export default function ReleasedMovies( {movieData}) {
 
   useEffect(()=>{
     
-    if(updatedUrl!==''){
-      console.log("received updated Url as ",updatedUrl)
+    if(updatedUrl!==''){      
       setupdatedEvent(true);
       axios
-      .get(`${updatedUrl}`)
+      .get(`/api/v1/movies?&limit=500&${updatedUrl}`)
       .then((response) =>  setfilteredData(response.data.movies))
       .then(console.log(filteredData.length));
     }else{
