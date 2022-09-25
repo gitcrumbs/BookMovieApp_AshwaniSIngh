@@ -15,6 +15,7 @@ import {
 import './MoviesFilter.css'
 
 
+
 const MoviesFilter = (props) => {
     
     const [genres, setGenres] = useState([]);
@@ -29,12 +30,12 @@ const MoviesFilter = (props) => {
  
 
     useEffect(() => {
-
+        // Populeting the genres
         axios
             .get("/api/v1/genres")
             .then((response) => setGenres(response.data.genres));
 
-
+    // Populeting the artists
         axios
             .get("/api/v1/artists")
             .then((response) => setArtists(response.data.artists));
@@ -70,12 +71,9 @@ const MoviesFilter = (props) => {
             status:"Released"            
         }
 
-        console.log("Movies Filter",moviesFilter)
-        const searchParams = new URLSearchParams({...moviesFilter});
-
-
-        console.log("My Updated Object from form is ",searchParams.toString())
-         props.updatedUrl(searchParams); 
+        // Filtering the movies based on the applied filters in the 'FIND MOVIES BY:' section
+        const searchParams = new URLSearchParams({...moviesFilter});     
+        props.updatedUrl(searchParams); 
 
     }
 
@@ -89,12 +87,14 @@ const MoviesFilter = (props) => {
             // On autofill we get a stringified value.
             typeof value === 'string' ? value.split(',') : value,
         );
-        //setGenreChoice(event.target.value);
+      
     };
 
-    const handleArtistChange = (event) => {
+    //Event Handlers for handling the applied filters.
 
-        console.log("Inside Artist check"+event.target.value)
+    //Handler for artist selections
+    const handleArtistChange = (event) => {
+        
         const {
             target: { value },
         } = event;
@@ -102,53 +102,35 @@ const MoviesFilter = (props) => {
             // On autofill we get a stringified value.
             typeof value === 'string' ? value.split(',') : value,
         );
-//        setArtistChoice(event.target.value);
+
     };
 
+
+    //Handler for start date changes
     const handleStartDateChange = (event) => {
         setstartDate(event.target.value);
     };
 
+    //Handler for end date changes
     const handleEndDateChange = (event) => {
         setendDate(event.target.value);
     };
 
+    //Handler for handling the name changes
     const handleNameChange = (event) => {
         setNameChange(event.target.value);
     };
 
 
     
-
-    const handleChangeMultiple = (event) => {
-        const { options } = event.target;
-        const value = [];
-
-        options.map((item) => {
-            value.push(item)
-        })
-             
-        
-    };
-
-    const handleChangeArtistMultiple = (event) => {
-        const { options } = event.target;
-        const value = [];
-        for (let i = 0, l = options.length; i < l; i += 1) {
-            if (options[i].selected) {
-                value.push(options[i].value);
-            }
-        }
-        setArtistChoice(value);
-    };
-
-
+    
 
     return (
+       //Form control components for user interactions on the UI.
 
         <div className="filter-form">
-            <Card>
-                <CardContent>
+            <Card >
+                <CardContent >
                     <InputLabel style={{ color: "#4791db" }}>
                         FIND MOVIES BY:
                     </InputLabel>
@@ -160,7 +142,7 @@ const MoviesFilter = (props) => {
                     <FormControl style={{ width: "100%", marginTop: "20px" }}>
                         <InputLabel id="demo-mutiple-name-label">Genres</InputLabel>
                         <Select
-                            labelId="demo-mutiple-name-label"
+                           
                             id="demo-mutiple-name"
                             multiple={true}
                             value={genreChoice}
@@ -181,7 +163,7 @@ const MoviesFilter = (props) => {
                     <FormControl style={{ width: "100%", marginTop: "20px" }}>
                         <InputLabel id="demo-mutiple-name-label">Artists</InputLabel>
                         <Select
-                            labelId="demo-mutiple-name-label"
+                           
                             id="demo-mutiple-name"
                             multiple={true}
                             value={artistChoice}

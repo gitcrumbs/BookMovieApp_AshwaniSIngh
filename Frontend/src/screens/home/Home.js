@@ -37,6 +37,8 @@ function Home(props) {
   const [tileData, settileData] = useState([]);
   const [releaseddata, setreleaseddata] = useState([]); 
 
+  //useEffect is used to populate the list of the movie and their details from the api provided
+
   useEffect(() => {
     axios
       .get("/api/v1/movies?limit=500&status=PUBLISHED")
@@ -53,6 +55,9 @@ function Home(props) {
   const { classes } = props;
 
   return (
+
+    //This componenet generates the list of upcoming movies fetched from the api endpoint
+
     <div>    
       <div className="upcoming_movies">Upcoming Movies</div>
       <div id="list_container">
@@ -71,6 +76,7 @@ function Home(props) {
 
         </GridList>
         </div>
+        {/* Component for populating the released movies based on the applied filters */}
         <ReleasedMovies movieData={releaseddata} />
         <div>
 

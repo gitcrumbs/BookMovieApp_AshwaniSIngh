@@ -12,14 +12,14 @@ import { Fragment } from "react";
 import Button from '@material-ui/core/Button';
 import Rating from '@mui/material/Rating';
 import Stack from '@mui/material/Stack';
-
+import StarBorderIcon from "@material-ui/icons/StarBorder";
 const Details = () => {
   let { id } = useParams();
   let [movieData, setMovieData] = useState("");
   let [genres, setGenres] = useState([]);
   let [youtubeUrl, setYouttubeUrl] = useState("");
   let [actors, setActors] = useState([]);
-  
+
 
   useEffect(() => {
     axios
@@ -60,25 +60,27 @@ const Details = () => {
   let opts = {
     height: "390",
     width: "640",
-    playerVars: {
-      // https://developers.google.com/youtube/player_parameters
+    playerVars: {      
       autoplay: 0,
       origin: "http://localhost:3000",
     },
   };
 
   const classes = useStyles();
-  
+    //Books show route and the movie details when user has performed the click and has landed on the 
+    //movie details page
   return (
     <div>
-      <div id="book_show">
+
+      
+      {<div id="book_show">
         <Link
           to={`/bookshow/${id}`}
           style={{ textDecoration: "none" }}
         >
           <Button variant="contained" size="small" style={{ marginRight: "10px" }} color="primary">Book Show</Button>
         </Link>
-      </div>
+      </div>}
 
 
       <Fragment>
@@ -133,6 +135,7 @@ const Details = () => {
                 style={{ marginTop: "16px" }}
               >
                 <b>Trailer:</b>
+                {/* React youtube component for showing the movie trailer */}
                 <YouTube
                   videoId={youtubeId}
                   opts={opts}
@@ -148,13 +151,34 @@ const Details = () => {
                 <b>Rate this movie:</b>
                 <div className="star-container">
                   <Stack spacing={1}>
-                    <Rating name="half-rating" defaultValue={2.5} precision={0.5} />
-                   
+                     <Rating name="half-rating" defaultValue={2.5} precision={0.5} /> 
+                    {/*  /*This new component can be used for better appearance.
+                      to use
+                       added by Ashwani Singh
+                      */}
+                                        
                   </Stack>
+
+
+                    {/* To use the StarBorderIcon disable the comments appropriately  */}
+
+                  {/* <div className="star-container">
+                      <StarBorderIcon />
+                      <StarBorderIcon />
+                      <StarBorderIcon />
+                      <StarBorderIcon />
+                      <StarBorderIcon />
+                    </div> */}
+
+
+
                 </div>
                 <div className="artist-heading">
                   <b>Artists: </b>
                 </div>
+
+                      {/* Component for populating the actors data */}
+
                 <div className={classes.root}>
                   <GridList cellHeight={180} className={classes.gridList}>
                     {actors ? (

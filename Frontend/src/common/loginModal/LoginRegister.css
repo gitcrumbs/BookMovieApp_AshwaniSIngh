@@ -2,19 +2,18 @@
 #login_modal{       
     width:25%;  
     height: fit-content; 
-    margin-top: 2%;  
-    margin-left: 33%;     
+    margin: auto;  
     
   }
-  
 
+ 
   .form_button{    
-    margin-top: 15%;
-    margin-left: 5%;
+    margin-top: 10%
   }
 
   #btn_login{
-    margin-left: 12%;
+    margin-left: auto;
+    margin-right: auto;
   }
 
 
@@ -24,8 +23,20 @@
 }
 
 .required_messages{
-  font-weight: bold; 
+  font-weight: bold;
   font-size: 13px;
   color: red;
+  display: -ms-flexbox;
+  display: flex; 
+  margin-left: 77px;
 }
+
+.form-content{
+  text-align: center;
+ }
   
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}

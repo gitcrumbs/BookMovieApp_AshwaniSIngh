@@ -5,22 +5,20 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 import BookShow from "../screens/bookshow/BookShow";
 import Confirmation from "../screens/confirmation/Confirmation";
 import Header from '../common/header/Header'
-import LoginRegister from "../common/loginModal/LoginRegister";
+
 
 
 
 
 
 const Controller = () => {
-  const baseUrl = "/api/v1/";
-
-    const [movieclicked, setmovieclicked] = useState(false);
-
-   const handleMovieClick = () =>{
-     setmovieclicked(true)
-   }
+  //base url for hosting from the proxy
+  const baseUrl = "/api/v1/";  
    
   return (
+
+    //Router used for routing the users based on the user actions on the screen
+
     <Router>
       <div className="main-container"> 
       <Header/>  

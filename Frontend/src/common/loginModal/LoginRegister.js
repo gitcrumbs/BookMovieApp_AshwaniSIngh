@@ -12,12 +12,9 @@ import './LoginRegister.css'
 import {loginUser,registeruser} from '../../auth/Auth'
 
 
-const username = "string";
-    const pwrd = "string";
 
 const LoginRegister = ({loginClick,setisLoggedIn,setloginClick}) => {
-    var base64 = require("base-64");
-    
+        
 
     const [loginOpen, setLoginOpen] = useState(loginClick);
     const [value, setValue] = useState(0);
@@ -82,21 +79,19 @@ const LoginRegister = ({loginClick,setisLoggedIn,setloginClick}) => {
         setLogin(false);
         setLoginOpen(false);
         
-        try{
-            console.log("User details are ",loginUserName)
-            loginUser(loginUserName,loginpasswrd).then(success=>{
+        try{           
+            loginUser(loginUserName,loginpasswrd).then(success=>{                
                 setLogin(false);
                 setLoginOpen(false);
                 setisLoggedIn(true);
+                
             }).catch(err=>{
-
-                console.log("Unable to login",err)
+               
                 setlogindisplayText("Unable to login");
                 setLoginOpen(true);
                 setLogin(true);
             })
-        }catch(except){
-            console.log("Unable to login",except)
+        }catch(except){            
             setLoginOpen(true);
             setLogin(true);
         }
@@ -253,7 +248,7 @@ const LoginRegister = ({loginClick,setisLoggedIn,setloginClick}) => {
                     {isValidated&&!IsemailSet ? <section className="required_messages">required</section>:null}
                     <TextField className="required_messages" label="Password"  type="password" style={{ margin: "5px 0px" }} onChange={handlePassword}/>
                     {isValidated&&!IspasswordSet ? <section className="required_messages">required</section>:null}
-                    <TextField className="required_messages" label="Contact No" style={{ margin: "5px 0px" }} onChange={handlephoneNumber}/>
+                    <TextField className="required_messages" type="number"  label="Contact No" style={{ margin: "5px 0px" }} onChange={handlephoneNumber}/>
                     {isValidated&&!IscontactNumberset ? <section className="required_messages">required</section>:null}
                     {success ? (
                         <Typography variant="subtitle1" gutterBottom>                           
