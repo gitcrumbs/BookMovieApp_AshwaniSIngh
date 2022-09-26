@@ -127,6 +127,7 @@
 										<srcFile>${sql.path}/setup-users.sql</srcFile>
 										<srcFile>${sql.path}/setup-movies.sql</srcFile>
 										<srcFile>${sql.path}/seed-data.sql</srcFile>
+										<srcFile>${sql.path}/test-data.sql</srcFile>
               						</srcFiles>
 		                        </configuration>
 		                    </execution>
